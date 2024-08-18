@@ -2,6 +2,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+//security packages 
+import helmet  from 'helmet';
+import xss from "xss-clean";
+import ExpressMongoSanitize from 'express-mongo-sanitize';
 //files import
 import cors from 'cors';
 import morgan from 'morgan';
@@ -26,6 +30,9 @@ connectDB();
 //rest object
 const app = express()
 //middleware
+app.use(helmet());
+app.use(xss());
+app.use(ExpressMongoSanitize());
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
